@@ -7,7 +7,7 @@ from tqdm import tqdm
 from app import models
 
 faker = Faker()
-DEFAULT_POSTS_RECORDS = 100000
+DEFAULT_POSTS_RECORDS = 1000
 
 CATEGORY_CHOICES = (
     'プログラミング',
@@ -43,3 +43,4 @@ class Command(BaseCommand):
             for _ in tqdm(range(n))
         ]
         models.Post.objects.bulk_create(posts)
+        print(f'Generated {n} post records')
