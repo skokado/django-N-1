@@ -4,7 +4,7 @@ Python: 3.9
 Django: 3.2.8
 
 ```shell
-$ git clone https://github.com/skokado/django-N-1.git
+$ git clone https://github.com/skokado/django-Nplus1.git
 $ cd django-N-1.git
 $ pipenv install
 $ pipevn shell
