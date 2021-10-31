@@ -23,6 +23,8 @@ from app import views
 urlpatterns = [
     path('good/', views.GoodView.as_view(), name='good'),
     path('bad/', views.BadView.as_view(), name='bad'),
+    path('many-to-many-good/', views.ManyToManyGoodView.as_view(), name='many-to-many-good'),
+    path('many-to-many-bad/', views.ManyToManyBadView.as_view(), name='many-to-many-bad'),
     path('admin/', admin.site.urls),
     path('', views.Home.as_view(), name='home'),
 ]

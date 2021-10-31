@@ -61,3 +61,44 @@ class GoodView(TemplateView):
 
         ctx['process_time'] = round((time.time() - start), 2)
         return ctx
+
+
+class ManyToManyBadView(TemplateView):
+    template_name = 'show-posts.html'
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        ctx = super().get_context_data(**kwargs)
+        ctx['view_name'] = 'ManyToMany Bad'
+
+        start = time.time()
+        posts = []
+        for post in Post.objects.all():
+            posts.append({
+                'id': post.id,
+                # タグ一覧をリストで取得する。ここで N+1 問題が発生。
+                'tags': ','.join([tag.name for tag in post.tags.all()])
+            })
+        ctx['posts'] = posts
+
+        ctx['process_time'] = round((time.time() - start), 2)
+        return ctx
+
+
+class ManyToManyGoodView(TemplateView):
+    template_name = 'show-posts.html'
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        ctx = super().get_context_data(**kwargs)
+        ctx['view_name'] = 'ManyToMany Good'
+
+        start = time.time()
+        posts = []
+        for post in Post.objects.all().prefetch_related('tags'):
+            posts.append({
+                'id': post.id,
+                'tags': ','.join([tag.name for tag in post.tags.all()])
+            })
+        ctx['posts'] = posts
+
+        ctx['process_time'] = round((time.time() - start), 2)
+        return ctx
