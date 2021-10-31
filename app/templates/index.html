@@ -6,15 +6,24 @@
 <body>
     <div class="container">
         <!-- Content here -->
-        <div class="row">
+        <h1 class="row">
             テーブルデータ: {{ records }}件
-        </div>
+        </h1>
+        <h2>1対多のシンプルパターン</h2>
         <div class="row">
             <a href="{% url 'good' %}">OKパターン</a>
         </div>
         
         <div class="row">
             <a href="{% url 'bad' %}">NGパターン(N+1問題が発生する)</a>
+        </div>
+        
+        <h2>多対多パターン</h2>
+        <div class="row">
+            <a href="{% url 'many-to-many-good' %}">OKパターン</a>
+        </div>
+        <div class="row">
+            <a href="{% url 'many-to-many-bad' %}">NGパターン</a>
         </div>
       </div>
       
